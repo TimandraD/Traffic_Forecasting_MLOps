@@ -22,5 +22,5 @@ def add_lag_features(df: pd.DataFrame, target_col: str = 'traffic_volume') -> pd
     df['lag_168h'] = df[target_col].shift(168)
     
     # Suppression des lignes contenant des NaN générés par les shifts
-    df = df.dropna().reset_index(drop=True)
+    df = df.dropna(subset=[target_col, 'lag_24h', 'lag_168h']).reset_index(drop=True)
     return df
