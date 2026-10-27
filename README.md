@@ -1,4 +1,4 @@
-# 🚗 Prévision du trafic routier : projet MLOps
+# Prévision du trafic routier : projet MLOps
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-Random%20Forest-orange)
@@ -6,11 +6,11 @@
 
 > **Peut-on anticiper les pics de congestion d'un axe routier à partir de l'historique du trafic et de la météo ?**
 
-Projet réalisé dans le cadre du cours de **MLOps** (Master 2) par **Timandra DHENRY** et **Llaora DE OLIVEIRA**.
+Projet réalisé dans le cadre du cours de **MLOps** (M2) par **Timandra DHENRY** et **Llaora DE OLIVEIRA**.
 
 ---
 
-## 📌 Sommaire
+## Sommaire
 
 1. [Contexte et problématique](#-contexte-et-problématique)
 2. [Les données](#-les-données)
@@ -23,13 +23,13 @@ Projet réalisé dans le cadre du cours de **MLOps** (Master 2) par **Timandra D
 
 ---
 
-## 🎯 Contexte et problématique
+## Contexte et problématique
 
 Les gestionnaires d'un axe routier doivent anticiper les périodes de forte affluence pour réguler le trafic (information des usagers, ajustement des feux, déploiement d'équipes). Notre objectif est de **prévoir le volume de trafic horaire** sur l'autoroute I-94 afin d'aider à cette régulation.
 
 Plus qu'un modèle sophistiqué, nous cherchons un **pipeline clair, reproductible et évalué avec des métriques parlantes** pour un lecteur non technique.
 
-## 📊 Les données
+## Les données
 
 - **Source :** [Metro Interstate Traffic Volume (Kaggle)](https://www.kaggle.com/datasets/pooriamst/metro-interstate-traffic-volume/data)
 - **Contenu :** volume de trafic horaire sur l'I-94 (sens ouest, entre Minneapolis et St Paul), avec la météo (température, pluie, neige, nébulosité), les jours fériés et la description du temps.
@@ -37,7 +37,7 @@ Plus qu'un modèle sophistiqué, nous cherchons un **pipeline clair, reproductib
 
 Le fichier brut est dans `data/raw/`.
 
-## 🧭 Démarche
+## Démarche
 
 ```mermaid
 flowchart LR
@@ -57,7 +57,7 @@ flowchart LR
 4. **Modélisation** (`src/train.py`, `notebooks/02_modelisation.ipynb`) : baseline, régression linéaire et Random Forest.
 5. **Évaluation** (`src/evaluate.py`) : métriques adaptées aux séries temporelles et validation croisée temporelle.
 
-### ⏱️ Un découpage chronologique, jamais aléatoire
+### Un découpage chronologique, jamais aléatoire
 
 Pour une série temporelle, mélanger les données ferait « voir le futur » au modèle et gonflerait les scores. On entraîne donc sur le passé et on teste sur la période la plus récente.
 
@@ -73,7 +73,7 @@ gantt
 
 La **validation croisée temporelle** (`TimeSeriesSplit`) répète cette logique sur plusieurs périodes successives de trois mois pour vérifier la stabilité des résultats.
 
-## 📈 Résultats
+## Résultats
 
 Résultats sur le jeu de test (avril à septembre 2018) :
 
@@ -93,7 +93,7 @@ Résultats sur le jeu de test (avril à septembre 2018) :
 ![Prédiction vs réalité](documentation/prediction_vs_realite.png)
 -->
 
-## 🗂️ Structure du dépôt
+## Structure du dépôt
 
 ```text
 Traffic_Forecasting_MLOps/
@@ -114,7 +114,7 @@ Traffic_Forecasting_MLOps/
 └── README.md
 ```
 
-## ⚙️ Installation et utilisation
+## Installation et utilisation
 
 ```bash
 # 1. Récupérer le projet
@@ -148,13 +148,13 @@ modele = train_model(train, "random_forest")
 print(evaluate(test[TARGET], modele.predict(test[FEATURES])))
 ```
 
-## 🔭 Limites et perspectives
+## Limites et perspectives
 
-- **Les lags supposent un historique connu** : le modèle prévoit à partir du trafic d'il y a 24 h et 7 jours. Les variables météo devraient provenir de prévisions dans un usage réel.
-- **Données anciennes (2012-2014) écartées** à cause d'un trou de plusieurs mois dans la série.
-- **Pistes d'amélioration :** modèles de gradient boosting (LightGBM, XGBoost), réglage des hyperparamètres, suivi des expériences avec **MLflow**, tests unitaires sur le nettoyage et les variables.
+**Les lags supposent un historique connu** : le modèle prévoit à partir du trafic d'il y a 24 h et 7 jours. Les variables météo devraient provenir de prévisions dans un usage réel.
+**Données anciennes (2012-2014) écartées** à cause d'un trou de plusieurs mois dans la série.
+**Pistes d'amélioration :** modèles de gradient boosting (LightGBM, XGBoost), réglage des hyperparamètres, suivi des expériences avec **MLflow**, tests unitaires sur le nettoyage et les variables.
 
-## 👥 Équipe
+## Binome
 
-- **Timandra DHENRY**
-- **Llaora DE OLIVEIRA**
+**Timandra DHENRY**
+**Llaora DE OLIVEIRA**
